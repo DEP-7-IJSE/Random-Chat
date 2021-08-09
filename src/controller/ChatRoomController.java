@@ -6,16 +6,17 @@
 package controller;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 
 public class ChatRoomController {
-    public JFXListView lstChat;
     public JFXTextField txtMessage;
     public JFXButton btnSend;
+    public JFXTextArea txtAreaMsg;
 
     public void txtMessage_OnAction(ActionEvent actionEvent) {
+        btnSend.fire();
     }
 
     public void btnSend_OnAction(ActionEvent actionEvent) {
