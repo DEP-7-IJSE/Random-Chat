@@ -62,7 +62,6 @@ public class ChatRoomController {
 
     public void btnSend_OnAction(ActionEvent actionEvent) {
         String message = txtMessage.getText();
-        //message = txtAreaMsg.getText().trim();
         try {
             dos.writeUTF(message);
         } catch (IOException e) {

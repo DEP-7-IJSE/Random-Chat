@@ -8,15 +8,18 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Server {
 
     public static void main(String[] args) {
+        ArrayList<Socket> connectedSockets = new ArrayList<>();
 
         try (ServerSocket serverSocket = new ServerSocket(9090)) {
             System.out.println("Server has been started");
             while (true) {
                 Socket localSocket = serverSocket.accept();
+                connectedSockets.add(localSocket);
                 System.out.println("Listening for incoming connections...");
                 new Thread(() -> {
                     try {
@@ -25,12 +28,14 @@ public class Server {
                         String message;
 
                         dis = new DataInputStream(localSocket.getInputStream());
-                        dos = new DataOutputStream(localSocket.getOutputStream());
 
                         while (true) {
                             System.out.println("Connected");
                             message = dis.readUTF();
-                            dos.writeUTF(message);
+                            for (Socket connectedSocket : connectedSockets) {
+                                dos = new DataOutputStream(connectedSocket.getOutputStream());
+                                dos.writeUTF(message);
+                            }
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
