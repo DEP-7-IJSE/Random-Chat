@@ -25,6 +25,7 @@ public class ChatRoomController {
     private static DataOutputStream dos;
 
     public void initialize() {
+        txtMessage.requestFocus();
         new Thread(() -> {
             try {
                 socket = new Socket("8.tcp.ngrok.io", 15002);

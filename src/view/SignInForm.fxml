@@ -15,7 +15,7 @@
             xmlns="http://javafx.com/javafx/8.0.171"
             fx:controller="controller.SignInFormController">
    <children>
-      <Label layoutX="101.0" layoutY="22.0" text="Free Chat">
+      <Label layoutX="101.0" layoutY="22.0" text="Random Chat">
          <font>
             <Font name="System Bold" size="20.0"/>
          </font>

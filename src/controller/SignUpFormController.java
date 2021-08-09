@@ -45,6 +45,7 @@ public class SignUpFormController {
                 stage.show();
                 stage.setResizable(false);
                 stage.setTitle("Random Chat Room");
+                ((Stage) (txtUser.getScene().getWindow())).close();
                 System.setProperty("app.user", txtUser.getText());
             } else {
                 new Alert(Alert.AlertType.ERROR, "Saving Failed").show();
