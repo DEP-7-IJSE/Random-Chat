@@ -12,14 +12,11 @@ public class AppInitializer extends Application {
 
     public static void main(String[] args) {
         launch(args);
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-
-        }));
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("/view/SignInForm.fxml"))));
+        primaryStage.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("/view/ChatRoom.fxml"))));
         primaryStage.centerOnScreen();
         primaryStage.show();
         primaryStage.setResizable(false);

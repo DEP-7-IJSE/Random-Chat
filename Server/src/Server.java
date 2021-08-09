@@ -10,25 +10,32 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server {
-    private static ServerSocket serverSocket;
-    private static Socket socket;
-    private static DataInputStream dis;
-    private static DataOutputStream dos;
 
     public static void main(String[] args) {
 
-        String message;
-
-        try {
-            serverSocket = new ServerSocket(9090);
-            socket = serverSocket.accept();
-
-            dis = new DataInputStream(socket.getInputStream());
-            dos = new DataOutputStream(socket.getOutputStream());
-
+        try (ServerSocket serverSocket = new ServerSocket(9090)) {
+            System.out.println("Server has been started");
             while (true) {
-                message = dis.readUTF();
-                dos.writeUTF(message);
+                Socket localSocket = serverSocket.accept();
+                System.out.println("Listening for incoming connections...");
+                new Thread(() -> {
+                    try {
+                        DataInputStream dis;
+                        DataOutputStream dos;
+                        String message;
+
+                        dis = new DataInputStream(localSocket.getInputStream());
+                        dos = new DataOutputStream(localSocket.getOutputStream());
+
+                        while (true) {
+                            System.out.println("Connected");
+                            message = dis.readUTF();
+                            dos.writeUTF(message);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }).start();
             }
         } catch (IOException e) {
             e.printStackTrace();
