@@ -3,35 +3,30 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+package service;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Server {
-    private static ServerSocket serverSocket;
+public class Client {
+
     private static Socket socket;
     private static DataInputStream dis;
     private static DataOutputStream dos;
 
-    public static void main(String[] args) {
-
-        String message;
-
+    private Client() {
         try {
-            serverSocket = new ServerSocket(9090);
-            socket = serverSocket.accept();
-
+            socket = new Socket("localhost", 151);
             dis = new DataInputStream(socket.getInputStream());
             dos = new DataOutputStream(socket.getOutputStream());
-
-            while (true) {
-                message = dis.readUTF();
-                dos.writeUTF(message);
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void sendMessage() {
+
     }
 }
