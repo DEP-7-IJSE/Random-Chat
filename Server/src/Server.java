@@ -30,7 +30,6 @@ public class Server {
                         dis = new DataInputStream(localSocket.getInputStream());
 
                         while (true) {
-                            System.out.println("Connected");
                             message = dis.readUTF();
                             for (Socket connectedSocket : connectedSockets) {
                                 dos = new DataOutputStream(connectedSocket.getOutputStream());
