@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import model.User;
@@ -34,13 +35,16 @@ public class SignUpFormController {
                 txtPassword.getText()
         );
 
-        if (USER_SERVICE.userIsExists(user)) {
+        if (USER_SERVICE.userIsExists(user.getUser())) {
             new Alert(Alert.AlertType.ERROR, "User is Already exists").show();
         } else {
             boolean saved = USER_SERVICE.writeDataFile(user);
             if (saved) {
                 Stage stage = new Stage();
-                stage.setScene(FXMLLoader.load(this.getClass().getResource("/view/ChatRoom.fxml")));
+                stage.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("/view/ChatRoom.fxml"))));
+                stage.show();
+                stage.setResizable(false);
+                stage.setTitle("Random Chat Room");
                 System.setProperty("app.user", txtUser.getText());
             } else {
                 new Alert(Alert.AlertType.ERROR, "Saving Failed").show();

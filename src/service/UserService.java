@@ -15,7 +15,7 @@ public class UserService {
     private static final File userDB = new File("User-db.user");
     private static List<User> USER_LIST = new ArrayList<>();
 
-    private void readDataFromFile() {
+    public static void readDataFromFile() {
         if (!userDB.exists()) return;
 
         try (FileInputStream fosStudent = new FileInputStream(userDB);
@@ -28,8 +28,13 @@ public class UserService {
         }
     }
 
-    public boolean userIsExists(User user) {
-        return USER_LIST.contains(user);
+    public boolean userIsExists(String userName) {
+        for (User user : USER_LIST) {
+            if (user.getUser().equals(userName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean writeDataFile(User user) {
@@ -43,5 +48,14 @@ public class UserService {
             return false;
         }
         return true;
+    }
+
+    public boolean authentication(User user) {
+        for (User user1 : USER_LIST) {
+            if (user.getUser().equals(user1.getUser())) {
+                if (user.getPassword().equals(user1.getPassword())) return true;
+            }
+        }
+        return false;
     }
 }
