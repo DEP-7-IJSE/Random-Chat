@@ -39,10 +39,21 @@ public class Server {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
+                    Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                        if (!localSocket.isClosed()) {
+                            try {
+                                localSocket.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }));
                 }).start();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 }

@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import model.User;
+import org.apache.commons.codec.digest.DigestUtils;
 import service.UserService;
 
 import java.io.IOException;
@@ -26,7 +27,7 @@ public class SignInFormController {
     public void signIn_OnAction(ActionEvent actionEvent) throws IOException {
         User user = new User(
                 txtUser.getText(),
-                txtPassword.getText()
+                DigestUtils.sha256Hex(txtPassword.getText())
         );
         if (USER_SERVICE.userIsExists(user.getUser())) {
             if (USER_SERVICE.authentication(user)) {

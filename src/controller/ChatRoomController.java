@@ -28,7 +28,7 @@ public class ChatRoomController {
         txtMessage.requestFocus();
         new Thread(() -> {
             try {
-                socket = new Socket("8.tcp.ngrok.io", 15002);
+                socket = new Socket("2.tcp.ngrok.io", 10026);
                 dis = new DataInputStream(socket.getInputStream());
                 dos = new DataOutputStream(socket.getOutputStream());
 
@@ -62,9 +62,10 @@ public class ChatRoomController {
     }
 
     public void btnSend_OnAction(ActionEvent actionEvent) {
-        String message = System.getProperty("app.user") + ":\t" + txtMessage.getText();
+        String message = System.getProperty("app.user") + "\t:" + txtMessage.getText();
         try {
             dos.writeUTF(message);
+            txtMessage.clear();
         } catch (IOException e) {
             e.printStackTrace();
         }

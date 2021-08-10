@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import model.User;
+import org.apache.commons.codec.digest.DigestUtils;
 import service.UserService;
 
 import java.io.IOException;
@@ -32,7 +33,7 @@ public class SignUpFormController {
 
         User user = new User(
                 txtUser.getText(),
-                txtPassword.getText()
+                DigestUtils.sha256Hex(txtPassword.getText())
         );
 
         if (USER_SERVICE.userIsExists(user.getUser())) {
