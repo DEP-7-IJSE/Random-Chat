@@ -7,8 +7,8 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
+import javafx.scene.control.TextField;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class ChatRoomController {
-    public JFXTextField txtMessage;
+    public TextField txtMessage;
     public JFXButton btnSend;
     public JFXTextArea txtAreaMsg;
 
